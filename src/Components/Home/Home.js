@@ -1,10 +1,12 @@
-import {data} from "./data.js"
-import './App.css';
-import { useState } from "react";
-import Home from "./Components/Home/Home.js";
+import React from 'react';
+import './Home.css';
+import { useState } from 'react';
+import { data } from '../../data.js';
+import Card from '../Card/Card';
 
-function App() {
-  const [search, setSearch] = useState("");
+function Home() {
+  const [search, setSearch] = useState('');
+
   const [selectedId, setSelectedId] = useState("");
   const [check, setCheck] = useState(false)
 
@@ -58,41 +60,35 @@ function App() {
     }
 
   }
-  
-  
+  // console.log(search);
   return (
-    <div className="App">
-      {/* <h1>Hello There!!</h1>
-      <input type="text" onChange={(e)=> setSearch(e.target.value)} placeholder="Enter College Name"></input>
-      <div>
-      <select value={selectedId} onChange={handleSelectChange}>
-      <option value=""> Filter By </option>
+    <div className="main-Section">
+      <div className="header">
+        <div className="log">Logo</div>
+        <div className="functionalities">
+          <input
+            className='search-Input'
+            type="text"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Enter College Name"
+          ></input>
+          <form className='dropdown'>
+            <select className='opts' value={selectedId} onChange={handleSelectChange}>
+              <option value=""> Filter By </option>
               <option value="Collegedunia_Rating"> Collegedunia Rating </option>
               <option value="Fees"> Fees </option>
               <option value="Users_Rating"> Users Rating </option>
               <option value="Ascending"> Ascending </option>
               <option value="Descending"> Descending </option>
-      </select>
-      {selectedId && <p>You selected {selectedId}</p>}
-    </div>
-     
-
-      {
-        
-        data.filter((item)=>{
-          return search.toLowerCase() === '' ? item : item.college_name.toLowerCase().includes(search)
-        })
-        .map((item)=>(
-          <div>
-          <h2 key={item.id}>{item.college_name}</h2>
-          <img src={item.college_img}></img>
-
-          </div>
-        ))
-      } */}
-      <Home /> 
+            </select>
+          </form>
+        </div>
+      </div>
+      <div className="hero-Section">
+        <Card value={search} />
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Home;
