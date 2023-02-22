@@ -166,6 +166,7 @@
 }
 .fee-info{
     width: 41%; 
+    margin-left: 8px;
     display: flex;
     flex-direction: column;
     font-size: small;

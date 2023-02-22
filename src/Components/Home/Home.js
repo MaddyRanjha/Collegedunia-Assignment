@@ -139,7 +139,7 @@ function Home() {
                 <div className='fee-user-rating'>
                     <div className='fee-info'>
                         
-                        <span className='fee'>{ele.college_fee}/-</span>
+                        <span className='fee'>₹{ele.college_fee}/-</span>
                         <span>BE/B.TECT-FIRST YEAR</span>
                         <span>FEE</span>
                     </div>
