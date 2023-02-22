@@ -1,24 +1,47 @@
 import React from 'react'
 import './Card.css'
 import { useState } from 'react';
-import { data } from '../../data.js';
 import { FaRegImage, FaRegFileVideo, FaSchool, FaCiLocationOn } from 'react-icons/fa';
 import {CiLocationOn } from 'react-icons/ci';
 import { HiBadgeCheck,HiClipboardCheck,HiOutlineDownload } from "react-icons/hi";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+
 function Card(props) {
     const search =props.value;
-    
+    const data = props.data;
+    // const [data1, setData1]=useState(Array.from({length:3}));
+    // const [hasMore, setHasMore]=useState(true);
+        const [dataScroll,setDataScroll] = useState(data.slice(0,3))
     
     // console.log(search);
+    // function fetchMoreData(){
+    //     setTimeout(()=>{
+    //         setData1(data1.concate(Array.from({length:3})))
+
+    //     },500)
+
+    const fetchMoreData = ()=>{
+
+        
+        var dataToBeAdded = data.slice(dataScroll.length,dataScroll.length+3)
+        var newData = dataScroll.concat(dataToBeAdded);
+        setDataScroll(newData);
+    }
+
+    // }
   return (
     <div className='inside-Section'>
         
+        <InfiniteScroll className='inside-Section1' dataLength={dataScroll.length} next={fetchMoreData} hasMore={dataScroll.length!=data.length ? true : false} endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          } > 
         {
             
-            data.filter((item)=>{
-                return search.toLowerCase() === '' ? item : item.college_name.toLowerCase().includes(search)
+            dataScroll.filter((item)=>{
+                return  item.college_name.toLowerCase().includes(search.toLowerCase())
               }).map((ele)=>(
                 <div className='card'>
             <div className='image-Section'>
@@ -88,6 +111,9 @@ function Card(props) {
             ))
         
     }
+
+     </InfiniteScroll>
+        
     </div>
   )
 }
